@@ -170,7 +170,7 @@ class _TenantHomePageState extends State<TenantHomePage> {
   Widget _buildFilterChip(String label) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: Colors.green,
         borderRadius: BorderRadius.circular(20),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -216,7 +216,7 @@ class _TenantHomePageState extends State<TenantHomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Mfonya Lodge",
+                  "Mufaya Lodge",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                 ),
                 Text(
