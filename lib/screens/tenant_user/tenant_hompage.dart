@@ -216,11 +216,11 @@ class _TenantHomePageState extends State<TenantHomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Mufaya Lodge",
+                  "Bachelor Flat",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                 ),
                 Text(
-                  "Holiday Stay",
+                  "Flat",
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
                 SizedBox(height: 4),
