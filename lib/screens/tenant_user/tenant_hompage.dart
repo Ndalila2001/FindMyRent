@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:find_my_rent/screens/reusable_widgets/custom_nav_bar.dart';
+import 'package:find_my_rent/screens/tenant_user/accomodation_details_page.dart';
 import 'package:flutter/material.dart';
 
 class TenantHomePage extends StatefulWidget {
@@ -183,7 +184,34 @@ class _TenantHomePageState extends State<TenantHomePage> {
 
   // Place Card Widget
   Widget _buildPlaceCard() {
-    return Stack(
+   return GestureDetector(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AccommodationDetailsPage(
+          title: "Bachelor Flat",
+          location: "Khomasdal, Windhoek, Namibia",
+          price: "N\$ 3,200",
+          owner: "Barthromew M Mufaya Junior",
+          numberOfRooms: 1,
+          numberOfBathrooms: 1,
+          limitOfPeople: 1,
+          goodAmenities: [
+            "Pet Friendly",
+            "Wi-Fi",
+            "Parking",
+            "Built In Cupboard",
+            "Built In Stove",
+          ],
+          description:
+              "Bachelor Flat available for rent in khomasdal 28. Contact owner for viewings. No deposit.",
+          image: "assets/images/login_background.jpg", // temporary image
+        ),
+      ),
+    );
+  },
+    child: Stack(
       children: [
         Container(
           decoration: BoxDecoration(
@@ -239,6 +267,7 @@ class _TenantHomePageState extends State<TenantHomePage> {
           ),
         ),
       ],
+    ),
     );
   }
 }
