@@ -8,7 +8,7 @@ class AccommodationDetailsPage extends StatelessWidget {
   final int numberOfRooms;
   final int numberOfBathrooms;
   final int limitOfPeople;
-  final List<String> goodAmenities;
+  final List<String> amenities;
   final String description;
   final String image;
 
@@ -21,7 +21,7 @@ class AccommodationDetailsPage extends StatelessWidget {
     required this.numberOfRooms,
     required this.numberOfBathrooms,
     required this.limitOfPeople,
-    required this.goodAmenities,
+    required this.amenities,
     required this.description,
     required this.image,
   });
@@ -106,6 +106,7 @@ class AccommodationDetailsPage extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
+                        color: Colors.green,
                        ),
                     ),
 
@@ -128,7 +129,7 @@ class AccommodationDetailsPage extends StatelessWidget {
 
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: goodAmenities
+                      children: amenities
                           .map((e) => Row(
                                 children: [
                                   const Icon(Icons.thumb_up,

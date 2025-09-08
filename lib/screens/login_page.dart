@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:find_my_rent/screens/account_type.dart';
 import 'package:find_my_rent/screens/tenant_user/tenant_hompage.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
@@ -154,7 +155,6 @@ class LoginPage extends StatelessWidget {
                       "Login",
                       style: TextStyle(
                         fontFamily: 'Poppins',
-                        fontWeight: FontWeight.bold,
                         fontSize: 16,
                         color: Colors.white,
                       ),
@@ -179,7 +179,12 @@ class LoginPage extends StatelessWidget {
                       const SizedBox(width: 5),
 
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const AccountTypePage())
+                          );
+                        },
                         child: const Text(
                           "Create an Account",
                           style: TextStyle(
