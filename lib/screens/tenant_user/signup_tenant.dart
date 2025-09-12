@@ -24,9 +24,9 @@ class _TenantSignUpPageState extends State<TenantSignUpPage> {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
-              primary: Colors.green, // header background
-              onPrimary: Colors.white, // header text
-              onSurface: Colors.black, // body text
+              primary: Colors.green, 
+              onPrimary: Colors.white,
+              onSurface: Colors.black, 
             ),
             dialogBackgroundColor: Colors.white,
           ),
