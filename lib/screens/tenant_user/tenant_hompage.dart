@@ -12,13 +12,6 @@ class TenantHomePage extends StatefulWidget {
 }
 
 class _TenantHomePageState extends State<TenantHomePage> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +23,7 @@ class _TenantHomePageState extends State<TenantHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Greeting & Profile Section
+                // Greeting 
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16.0, vertical: 10.0),
@@ -61,7 +54,7 @@ class _TenantHomePageState extends State<TenantHomePage> {
                         ),
                       ),
 
-                      // Empty Profile Icon
+                      //Profile Icon
                       const CircleAvatar(
                         radius: 22,
                         backgroundColor: Colors.grey,
@@ -157,17 +150,26 @@ class _TenantHomePageState extends State<TenantHomePage> {
             ),
           ),
 
-          // ⬇️ Floating Nav Bar
-          CustomNavBar(
-            selectedIndex: _selectedIndex,
-            onItemTapped: _onItemTapped,
-          ),
+          
         ],
+        
       ),
+       bottomNavigationBar: CustomNavBar(
+    selectedIndex: 0, 
+    onItemTapped: (index) {
+      if (index==1) {
+        Navigator.pushReplacementNamed(context, "/likes");
+      } else if (index==2) {
+        Navigator.pushReplacementNamed(context, "/messages");
+      }
+      
+    },
+     )
+      
     );
   }
 
-  // Filter Chip Widget
+ 
   Widget _buildFilterChip(String label) {
     return Container(
       decoration: BoxDecoration(

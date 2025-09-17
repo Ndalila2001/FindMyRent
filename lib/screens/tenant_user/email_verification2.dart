@@ -28,25 +28,15 @@ void showSuccessDialog(BuildContext context) {
                 repeat: true,
               ),
               
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
 
               const Text(
-                "Your email/phone number has successfully been confirmed!",
+                "Your account has successfully been created!",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16, color: Colors.black87, fontWeight: FontWeight.bold),
               ),
 
-              const SizedBox(height: 5),
-              
-              const Text(
-                "Your account is under an approval process.\n"
-                "You will receive an email when your account has been approved.",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.black87),
-              ),
-
-              const SizedBox(height: 25),
-
+              const SizedBox(height: 15),
             
               SizedBox(
                 width: double.infinity,

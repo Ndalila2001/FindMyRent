@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'dart:ui';
+import 'package:find_my_rent/screens/tenant_user/email_verification2.dart';
 import 'package:flutter/material.dart';
 import '../reusable_widgets/custom_text_field.dart'; 
 
@@ -169,7 +170,10 @@ class _TenantSignUpPageState extends State<TenantSignUpPage> {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () {
-                          // sign up
+                          Navigator.push (
+                            context,
+                            MaterialPageRoute(builder: (context) => const EmailVerificationPage(sentCode: '')),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black,
