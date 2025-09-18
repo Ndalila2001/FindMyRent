@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
 
-          // Bottom branding
+          // groundshaker logo
           Padding(
             padding: const EdgeInsets.only(bottom: 30),
             child: Column(
