@@ -53,7 +53,7 @@ class _MessageViewPageState extends State<MessageViewPage> {
       ),
       body: Column(
         children: [
-          // Chat messages
+          // chat messages
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.all(16),
@@ -90,7 +90,7 @@ class _MessageViewPageState extends State<MessageViewPage> {
             ),
           ),
 
-          // Message input
+          // message input field
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             color: Colors.white,

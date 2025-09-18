@@ -59,7 +59,7 @@ class _MessagesPageState extends State<MessagesPage> {
 
           return GestureDetector(
             onTap: () {
-              // Mark chat as read
+              // mark chat as read
               setState(() {
                 unread[index] = false;
               });
@@ -82,7 +82,7 @@ class _MessagesPageState extends State<MessagesPage> {
               ),
               child: Row(
                 children: [
-                  // Profile picture
+                  // profile picture
                   const CircleAvatar(
                     radius: 28,
                     backgroundColor: Colors.grey,
@@ -94,7 +94,7 @@ class _MessagesPageState extends State<MessagesPage> {
                   ),
                   const SizedBox(width: 12),
 
-                  // Chat details
+                  // chats
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +123,7 @@ class _MessagesPageState extends State<MessagesPage> {
                     ),
                   ),
 
-                  // Time + unread dot
+                  // time and unread dot
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -156,7 +156,15 @@ class _MessagesPageState extends State<MessagesPage> {
       ),
       bottomNavigationBar: CustomNavBar(
         selectedIndex: 2,
-        onItemTapped: (index) {},
+        onItemTapped: (index) {
+          if (index==0) {
+            Navigator.pushReplacementNamed(context, "/home");
+          } else if (index==1) {
+            Navigator.pushReplacementNamed(context, "/likes");
+          } else if (index==3) {
+            Navigator.pushReplacementNamed(context, "/profile");
+          }
+        },
       ),
     );
   }

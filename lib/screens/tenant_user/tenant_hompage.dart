@@ -161,6 +161,8 @@ class _TenantHomePageState extends State<TenantHomePage> {
         Navigator.pushReplacementNamed(context, "/likes");
       } else if (index==2) {
         Navigator.pushReplacementNamed(context, "/messages");
+      } else if (index==3) {
+        Navigator.pushReplacementNamed(context, "/profile");
       }
       
     },

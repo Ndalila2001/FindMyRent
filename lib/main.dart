@@ -1,5 +1,6 @@
 import 'package:find_my_rent/screens/splash_screen.dart';
 import 'package:find_my_rent/screens/tenant_user/messagespage.dart';
+import 'package:find_my_rent/screens/tenant_user/profilepage.dart';
 import 'package:find_my_rent/screens/tenant_user/tenant_hompage.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         "/home": (context) => const TenantHomePage(),
         
         "/messages": (context) => const MessagesPage(),
+        "/profile": (context) => const ProfilePage()
        
       },
     );
