@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          // Centered content (logo + loader)
+          // logo and loading indicator
           Expanded(
             child: Center(
               child: Column(
