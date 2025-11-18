@@ -1,4 +1,5 @@
 import 'package:find_my_rent/screens/splash_screen.dart';
+import 'package:find_my_rent/screens/tenant_user/likespage.dart';
 import 'package:find_my_rent/screens/tenant_user/messagespage.dart';
 import 'package:find_my_rent/screens/tenant_user/profilepage.dart';
 import 'package:find_my_rent/screens/tenant_user/tenant_hompage.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/splash": (context) => const SplashScreen(),
         "/home": (context) => const TenantHomePage(),
-        
+        "/likes": (context) => const LikesPage(),
         "/messages": (context) => const MessagesPage(),
         "/profile": (context) => const ProfilePage()
        

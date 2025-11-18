@@ -5,6 +5,7 @@ import 'package:find_my_rent/screens/reusable_widgets/place_card.dart';
 import 'package:flutter/material.dart';
 
 class TenantHomePage extends StatefulWidget {
+
   const TenantHomePage({super.key});
 
   @override
@@ -36,7 +37,7 @@ class _TenantHomePageState extends State<TenantHomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Hello, Alex",
+                              "Hello,",
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.green[600],
@@ -68,7 +69,7 @@ class _TenantHomePageState extends State<TenantHomePage> {
                   ),
                 ),
 
-                // 🔍 Search Bar
+                //  Search Bar
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 10),

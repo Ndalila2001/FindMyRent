@@ -1,7 +1,9 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:math';
 import 'dart:ui';
 import 'package:find_my_rent/screens/login_page.dart';
+import 'package:find_my_rent/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -31,7 +33,7 @@ void showSuccessDialog(BuildContext context) {
               const SizedBox(height: 10),
 
               const Text(
-                "Your email/phone number has successfully been confirmed!",
+                "Your email has successfully been confirmed!",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16, color: Colors.black87, fontWeight: FontWeight.bold),
               ),
@@ -39,8 +41,8 @@ void showSuccessDialog(BuildContext context) {
               const SizedBox(height: 5),
               
               const Text(
-                "Your account is under an approval process.\n"
-                "You will receive an email when your account has been approved.",
+                "Please use your details to log in.",
+              
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16, color: Colors.black87),
               ),
@@ -54,7 +56,7 @@ void showSuccessDialog(BuildContext context) {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const LoginPage())
+                      MaterialPageRoute(builder: (context) =>  LoginPage())
                     ); 
                   },
                   style: ElevatedButton.styleFrom(
@@ -79,9 +81,18 @@ void showSuccessDialog(BuildContext context) {
 }
 
 class EmailVerificationPage extends StatefulWidget {
-  final String sentCode; // the code sent to the user's email
+  final String email;
+  final String fullName;
+  final String password;
+  final String confirmPassword;
+  final String sentCode;
 
-  const EmailVerificationPage({super.key, required this.sentCode});
+  const EmailVerificationPage({super.key,
+    required this.email,
+    required this.fullName,
+    required this.password,
+    required this.confirmPassword, 
+    required this.sentCode,});
 
   @override
   State<EmailVerificationPage> createState() => _EmailVerificationPageState();
@@ -91,15 +102,22 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
   String enteredCode = "";
   String? errorMessage;
 
-  void _verifyCode() {
-    if (enteredCode == widget.sentCode) {
+  void _verifyCode()async {
+  try {
+    
+     await ApiService.verifyEmailCode(
+      email: widget.email,
+      code: enteredCode,
+    );
+    
     showSuccessDialog(context);
-  } else {
+     print("Verification failed: $e");
+  } catch (e) {
     setState(() {
-      errorMessage = "Invalid code. Please try again.";
+      errorMessage = "Verification failed: ${e.toString()}";
     });
-  }   
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +181,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const Text(
-                          "Verify Your Email or Phone Number",
+                          "Verify Your Email",
                           style: TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 22,
@@ -172,7 +190,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                         ),
                         const SizedBox(height: 10),
                         const Text(
-                          "Enter the 6-digit code sent to your email address or phone number.",
+                          "Enter the 6-digit code sent to your email address",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: 'Poppins',
@@ -185,7 +203,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                       
                         PinCodeTextField(
                           appContext: context,
-                          length: 4, 
+                          length: 6, 
                           obscureText: false,
                           animationType: AnimationType.fade,
                           keyboardType: TextInputType.number,

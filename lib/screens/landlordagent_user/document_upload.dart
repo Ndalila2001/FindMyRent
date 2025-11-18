@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'dart:ui';
-import 'package:find_my_rent/screens/landlordagent_user/email_verification.dart';
+//import 'package:find_my_rent/screens/landlordagent_user/email_verification.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -158,10 +158,10 @@ class _DocumentUploadPageState extends State<DocumentUploadPage> {
                           height: 50,
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const EmailVerificationPage(sentCode: '') )
-                                );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(builder: (context) => const EmailVerificationPage(sentCode: '', email: '', fullName: '', password: '', confirmPassword: '',) )
+                              //   );
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black,

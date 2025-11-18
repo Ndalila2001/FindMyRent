@@ -1,13 +1,17 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
-import 'package:find_my_rent/screens/account_type.dart';
+import 'package:find_my_rent/screens/tenant_user/signup_tenant.dart';
 import 'package:find_my_rent/screens/tenant_user/tenant_hompage.dart';
+import 'package:find_my_rent/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+   LoginPage({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +104,7 @@ class LoginPage extends StatelessWidget {
                   
                   //email/phone number text field
                   TextField(
+                    controller: usernameController,
                     decoration: InputDecoration(
                       hintText: "Email Address or Phone Number",
                       hintStyle: const TextStyle(fontFamily: 'Poppins'),
@@ -117,6 +122,7 @@ class LoginPage extends StatelessWidget {
                   
                   //password text field
                   TextField(
+                    controller: passwordController,
                     decoration: InputDecoration(
                       hintText: "Password",
                       hintStyle: const TextStyle(fontFamily: 'Poppins'),
@@ -138,12 +144,39 @@ class LoginPage extends StatelessWidget {
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: (){
-                        //temporary navigation
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => const TenantHomePage()), 
-                        );
+                      onPressed: () async {
+                        final username = usernameController.text.trim();
+                        final password = passwordController.text.trim();
+
+                        if (username.isEmpty || password.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please enter your username and password"),
+                          backgroundColor: Colors.red,
+                          ));
+                          return;
+                        }
+                        try {
+                          final response = await ApiService.login(
+                            username: username,
+                            password: password,
+                          );
+                          
+
+                          print("log in successful: $response");
+
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context)=>  const TenantHomePage()),
+                          );
+                        } catch (e) {
+                          print("log in failed: $e");
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                               SnackBar(
+                                 content: Text("Login failed: ${e.toString()}"),
+                                 backgroundColor: Colors.red,
+                                ),
+                           );  
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                        backgroundColor: Colors.black,
@@ -182,7 +215,7 @@ class LoginPage extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const AccountTypePage())
+                            MaterialPageRoute(builder: (context) => const TenantSignUpPage())
                           );
                         },
                         child: const Text(

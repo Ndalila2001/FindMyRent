@@ -14,7 +14,7 @@ class PlaceCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const AccommodationDetailsPage(
+            builder: (context) => const AccommodationDetailsPage( //temporary data
               title: "Bachelor Flat", 
               location: "Khomasdal 28, Windhoek, Namibia", 
               price: "N\$ 3,200", 
