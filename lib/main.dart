@@ -1,10 +1,7 @@
+import 'package:find_my_rent/conts/themes.dart';
 import 'package:find_my_rent/screens/splash_screen.dart';
-import 'package:find_my_rent/screens/tenant_user/likespage.dart';
-import 'package:find_my_rent/screens/tenant_user/messagespage.dart';
-import 'package:find_my_rent/screens/tenant_user/profilepage.dart';
-import 'package:find_my_rent/screens/tenant_user/tenant_hompage.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,19 +12,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: "/splash",
-
-      routes: {
-        "/splash": (context) => const SplashScreen(),
-        "/home": (context) => const TenantHomePage(),
-        "/likes": (context) => const LikesPage(),
-        "/messages": (context) => const MessagesPage(),
-        "/profile": (context) => const ProfilePage()
-       
-      },
+    return ScreenUtilInit(
+      designSize: const Size(430, 932),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Find My Rent',
+        theme: lightMode,
+        darkTheme: darkMode,
+        themeMode: ThemeMode.system,
+        home: const SplashScreen(),
+      ),
     );
   }
 }
-
