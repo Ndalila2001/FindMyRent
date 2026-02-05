@@ -3,6 +3,7 @@
 import 'package:find_my_rent/conts/buttons.dart';
 import 'package:find_my_rent/screens/login_page.dart';
 import 'package:find_my_rent/screens/tenant_user/signup_tenant.dart';
+import 'package:find_my_rent/screens/typeofsignup.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
@@ -59,9 +60,8 @@ class Onboardingscreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: 'Clarendon',
-                            fontWeight: FontWeight.bold,
                             fontSize: 28.sp,
-                            height: 0.8.h,
+                            height: 0.98.h,
                             color: Colors.black,
                           ),
                         ),
@@ -251,7 +251,8 @@ class Onboardingscreen extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoginPage()));
+                                      builder: (context) =>
+                                          const Typeofsignup()));
                             }),
                         const SizedBox(height: 15),
 
@@ -273,8 +274,7 @@ class Onboardingscreen extends StatelessWidget {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              const TenantSignUpPage()));
+                                          builder: (context) => LoginPage()));
                                 },
                                 child: Text(
                                   "Login",

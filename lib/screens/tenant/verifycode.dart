@@ -55,7 +55,7 @@ class LoginPage extends StatelessWidget {
                       children: [
                         SizedBox(height: 20.h),
                         Text(
-                          "LOGIN",
+                          "CONFIRM ACCOUNT",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: 'Clarendon',
@@ -66,21 +66,13 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 40.h),
-                        EmailTextField(
-                            controller: TextEditingController(),
-                            hintText: "Email Address or Phone Number"),
-                        SizedBox(height: 10.h),
-                        PasswordTextField(
-                            controller: TextEditingController(),
-                            hintText: "Password"),
-                        SizedBox(height: 40.h),
-                        MainButton1(text: "Login", onTap: () {}),
+                        MainButton1(text: "Confirm", onTap: () {}),
                         SizedBox(height: 20.h),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Don't Have an Account?",
+                                "Didn't receive a code?",
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.bold,
@@ -98,7 +90,7 @@ class LoginPage extends StatelessWidget {
                                               const TenantSignUpPage()));
                                 },
                                 child: Text(
-                                  "Create an Account",
+                                  "RESEND",
                                   style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 14.sp,
