@@ -1,14 +1,18 @@
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
+
 import 'package:find_my_rent/conts/buttons.dart';
-import 'package:find_my_rent/screens/tenant_user/signup_tenant.dart';
+import 'package:find_my_rent/conts/textfields.dart';
+import 'package:find_my_rent/screens/landlord/landlordemailconfirm.dart';
+import 'package:find_my_rent/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginPage extends StatelessWidget {
+class SignupPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  LoginPage({super.key});
+  SignupPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,7 @@ class LoginPage extends StatelessWidget {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: Container(
-                color: Colors.black,
+                color: Colors.black.withOpacity(0),
               ),
             ),
           ),
@@ -52,7 +56,7 @@ class LoginPage extends StatelessWidget {
                       children: [
                         SizedBox(height: 20.h),
                         Text(
-                          "CONFIRM ACCOUNT",
+                          "SIGNUP",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: 'Clarendon',
@@ -63,13 +67,78 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 40.h),
-                        MainButton1(text: "Confirm", onTap: () {}),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 175.w,
+                              child: ShortUserNameField(
+                                controller: TextEditingController(),
+                                hintText: 'First Name',
+                              ),
+                            ),
+                            SizedBox(width: 5.w),
+                            SizedBox(
+                              width: 175.w,
+                              child: ShortUserNameField(
+                                controller: TextEditingController(),
+                                hintText: 'Last Name',
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10.h),
+                        EmailTextField(
+                            controller: TextEditingController(),
+                            hintText: "Email Address"),
+                        SizedBox(height: 10.h),
+                        PhoneNumber(
+                            controller: TextEditingController(),
+                            hintText: "Phone Number"),
+                        SizedBox(height: 10.h),
+                        PasswordTextField(
+                            controller: TextEditingController(),
+                            hintText: "Password"),
+                        SizedBox(height: 10.h),
+                        PasswordTextField(
+                            controller: TextEditingController(),
+                            hintText: "Confirm Password"),
+                        SizedBox(height: 10.h),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 175.w,
+                              child: DateOfBirthField(
+                                controller: TextEditingController(),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 175.w,
+                              child: CustomDropdown(
+                                options: const ["Male", "Female", "Other"],
+                                controller: TextEditingController(),
+                                hintText: 'Gender',
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 40.h),
+                        MainButton1(
+                            text: "Next",
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const LandlordEmailConfirm()));
+                            }),
                         SizedBox(height: 20.h),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Didn't receive a code?",
+                                "Already Have an Account?",
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.bold,
@@ -83,11 +152,10 @@ class LoginPage extends StatelessWidget {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              const TenantSignUpPage()));
+                                          builder: (context) => LoginPage()));
                                 },
                                 child: Text(
-                                  "RESEND",
+                                  "Login",
                                   style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 14.sp,

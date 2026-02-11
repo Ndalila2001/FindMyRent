@@ -3,6 +3,56 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+//Short Username Text Field
+class ShortUserNameField extends StatelessWidget {
+  final TextEditingController controller;
+  final String hintText;
+
+  const ShortUserNameField({
+    super.key,
+    required this.controller,
+    required this.hintText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      textAlign: TextAlign.center,
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: TextStyle(
+          fontSize: 18.sp,
+          fontFamily: 'Clarendon',
+          fontWeight: FontWeight.bold,
+          color: Theme.of(context).colorScheme.surface.withOpacity(0.5),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.surface,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.surface,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 26.h),
+      ),
+      style: TextStyle(
+        fontSize: 18.sp,
+        height: 0.9,
+        fontFamily: 'Clarendon',
+        color: Theme.of(context).colorScheme.surface,
+      ),
+    );
+  }
+}
+
 // Email Text Field
 class EmailTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -437,10 +487,10 @@ class CodeTextField extends StatefulWidget {
   const CodeTextField({
     super.key,
     required this.controller,
-    this.fieldWidth = 60,
+    this.fieldWidth = 40,
     this.fieldHeight = 60,
     this.borderRadius = 12,
-    this.fieldMargin = const EdgeInsets.symmetric(horizontal: 8),
+    this.fieldMargin = const EdgeInsets.symmetric(horizontal: 1),
   });
 
   @override
@@ -450,7 +500,7 @@ class CodeTextField extends StatefulWidget {
 class _CodeTextFieldState extends State<CodeTextField> {
   final List<TextEditingController> controllers = [];
   final List<FocusNode> focusNodes = [];
-  final int fieldCount = 6; // Change this to 6 fields
+  final int fieldCount = 6;
 
   @override
   void initState() {
@@ -490,40 +540,142 @@ class _CodeTextFieldState extends State<CodeTextField> {
       children: List.generate(fieldCount, (index) {
         return Container(
           margin: widget.fieldMargin,
-          width: 60.w, // Adjust width if necessary
-          height: 80.h, // Adjust height if necessary
+          width: 56.w,
+          height: 80.h,
           child: TextField(
             controller: controllers[index],
             focusNode: focusNodes[index],
             maxLength: 1,
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.number,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 30.sp,
-              color: Theme.of(context).colorScheme.onSurface,
+              color: Theme.of(context).colorScheme.surface,
               fontFamily: 'Clarendon',
             ),
             decoration: InputDecoration(
               counterText: '',
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.surface,
                   width: 2.0,
                 ),
-                borderRadius: BorderRadius.circular(22.r),
+                borderRadius: BorderRadius.circular(20.r),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.surface,
                   width: 2.0,
                 ),
-                borderRadius: BorderRadius.circular(22.r),
+                borderRadius: BorderRadius.circular(20.r),
               ),
             ),
             onChanged: (value) => _onChanged(index, value),
           ),
         );
       }),
+    );
+  }
+}
+
+// Phone Number Text Field with Masking
+class PhoneNumber extends StatefulWidget {
+  final TextEditingController controller;
+  final String? hintText;
+
+  const PhoneNumber({super.key, required this.controller, this.hintText});
+
+  @override
+  State<PhoneNumber> createState() => _PhoneNumberState();
+}
+
+class _PhoneNumberState extends State<PhoneNumber> {
+  late TextEditingController _internalController;
+
+  @override
+  void initState() {
+    super.initState();
+    _internalController = widget.controller;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: _internalController,
+      inputFormatters: [_PhoneInputFormatter()],
+      keyboardType: TextInputType.phone,
+      textAlign: TextAlign.center,
+      decoration: InputDecoration(
+        hintText: widget.hintText ?? '+264 8X XXX XXXX',
+        hintStyle: TextStyle(
+          color: Theme.of(context).colorScheme.surface.withOpacity(0.5),
+          fontFamily: 'Clarendon',
+          fontWeight: FontWeight.bold,
+          fontSize: 18.sp,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.surface,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.surface,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 26.h),
+      ),
+      style: TextStyle(
+        fontSize: 18.sp,
+        height: 0.9,
+        fontFamily: 'Clarendon',
+        color: Theme.of(context).colorScheme.surface,
+        letterSpacing: 1.0,
+      ),
+    );
+  }
+}
+
+class _PhoneInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    // Extract only digits from the input
+    var digitsOnly = newValue.text.replaceAll(RegExp(r'[^\d]'), '');
+
+    // Limit to 12 digits total (264 + 8 more digits)
+    if (digitsOnly.length > 12) {
+      return oldValue;
+    }
+
+    // Format the number: +264 8X XXX XXXX
+    var formatted = '';
+    if (digitsOnly.isEmpty) {
+      formatted = '';
+    } else if (digitsOnly.length <= 3) {
+      formatted = '+$digitsOnly';
+    } else if (digitsOnly.length <= 5) {
+      formatted = '+${digitsOnly.substring(0, 3)} ${digitsOnly.substring(3)}';
+    } else if (digitsOnly.length <= 8) {
+      formatted =
+          '+${digitsOnly.substring(0, 3)} ${digitsOnly.substring(3, 5)} ${digitsOnly.substring(5)}';
+    } else {
+      formatted =
+          '+${digitsOnly.substring(0, 3)} ${digitsOnly.substring(3, 5)} ${digitsOnly.substring(5, 8)} ${digitsOnly.substring(8)}';
+    }
+
+    // Calculate new cursor position
+    int cursorPosition = formatted.length;
+
+    return TextEditingValue(
+      text: formatted,
+      selection: TextSelection.collapsed(offset: cursorPosition),
     );
   }
 }

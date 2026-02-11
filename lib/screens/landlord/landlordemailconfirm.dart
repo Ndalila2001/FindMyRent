@@ -1,18 +1,20 @@
-// ignore_for_file: deprecated_member_use, use_build_context_synchronously
+import 'dart:ui';
 
 import 'package:find_my_rent/conts/buttons.dart';
 import 'package:find_my_rent/conts/textfields.dart';
+import 'package:find_my_rent/screens/landlord/landlordkyc.dart';
 import 'package:find_my_rent/screens/login_page.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SignupPage extends StatelessWidget {
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  SignupPage({super.key});
+class LandlordEmailConfirm extends StatefulWidget {
+  const LandlordEmailConfirm({super.key});
 
+  @override
+  State<LandlordEmailConfirm> createState() => _LandlordEmailConfirmState();
+}
+
+class _LandlordEmailConfirmState extends State<LandlordEmailConfirm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,60 +57,36 @@ class SignupPage extends StatelessWidget {
                       children: [
                         SizedBox(height: 20.h),
                         Text(
-                          "SIGNUP",
+                          "CONFIRM ACCOUNT",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: 'Clarendon',
                             fontWeight: FontWeight.bold,
-                            fontSize: 40.sp,
+                            fontSize: 34.sp,
                             height: 0.8.h,
                             color: Colors.black,
                           ),
                         ),
                         SizedBox(height: 40.h),
-                        EmailTextField(
-                            controller: TextEditingController(),
-                            hintText: "Full Names"),
-                        SizedBox(height: 10.h),
-                        EmailTextField(
-                            controller: TextEditingController(),
-                            hintText: "Email Address or Phone Number"),
-                        SizedBox(height: 10.h),
-                        PasswordTextField(
-                            controller: TextEditingController(),
-                            hintText: "Password"),
-                        SizedBox(height: 10.h),
-                        PasswordTextField(
-                            controller: TextEditingController(),
-                            hintText: "Confirm Password"),
-                        SizedBox(height: 10.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: 175.w,
-                              child: DateOfBirthField(
-                                controller: TextEditingController(),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 175.w,
-                              child: CustomDropdown(
-                                options: const ["Male", "Female", "Other"],
-                                controller: TextEditingController(),
-                                hintText: 'Gender',
-                              ),
-                            )
-                          ],
+                        CodeTextField(
+                          controller: TextEditingController(),
                         ),
                         SizedBox(height: 40.h),
-                        MainButton1(text: "Next", onTap: () {}),
+                        MainButton1(
+                            text: "Confirm",
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const Landlordkyc()));
+                            }),
                         SizedBox(height: 20.h),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Already Have an Account?",
+                                "Didn't receive the code?",
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.bold,
@@ -125,7 +103,7 @@ class SignupPage extends StatelessWidget {
                                           builder: (context) => LoginPage()));
                                 },
                                 child: Text(
-                                  "Login",
+                                  "Resend",
                                   style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 14.sp,

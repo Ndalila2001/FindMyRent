@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:find_my_rent/screens/tenant/termsandconditions.dart';
+import 'package:find_my_rent/screens/landlord/termsandconditions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
