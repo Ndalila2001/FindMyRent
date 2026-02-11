@@ -10,8 +10,9 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.onSurface,
+      body: const Center(
         child: Text(
           'Profile Screen',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

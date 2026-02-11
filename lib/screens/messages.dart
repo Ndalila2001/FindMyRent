@@ -10,8 +10,9 @@ class Messages extends StatefulWidget {
 class _MessagesState extends State<Messages> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.onSurface,
+      body: const Center(
         child: Text(
           'Messages Screen',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

@@ -37,6 +37,8 @@ flutter:
     - assets/images/groundshakers logo.png
     - assets/animations/success.json
     - assets/images/
+    - assets/
+    - assets/icons/
    
 
   fonts:

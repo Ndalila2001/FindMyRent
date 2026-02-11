@@ -25,44 +25,38 @@ class _HomemanagerState extends State<Homemanager> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: _pages[_currentIndex],
+      backgroundColor: Theme.of(context).colorScheme.onSurface,
+      body: SafeArea(child: _pages[_currentIndex]),
       bottomNavigationBar: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
+        margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(30.r),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 20,
-              spreadRadius: 2,
-            ),
-          ],
+          color: Theme.of(context).colorScheme.surface,
+          borderRadius: BorderRadius.circular(40.r),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.h),
+          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 30.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildNavItem(
                 iconPath: 'assets/icons/homeicon.png',
                 index: 0,
+                title: "Home",
               ),
               _buildNavItem(
                 iconPath: 'assets/icons/likesicon.png',
                 index: 1,
+                title: "Likes",
               ),
               _buildNavItem(
                 iconPath: 'assets/icons/messagesicon.png',
                 index: 2,
+                title: "Messages",
               ),
               _buildNavItem(
                 iconPath: 'assets/icons/profileicon.png',
                 index: 3,
+                title: "Profile",
               ),
             ],
           ),
@@ -71,7 +65,8 @@ class _HomemanagerState extends State<Homemanager> {
     );
   }
 
-  Widget _buildNavItem({required String iconPath, required int index}) {
+  Widget _buildNavItem(
+      {required String iconPath, required int index, required String title}) {
     final isSelected = _currentIndex == index;
     return GestureDetector(
       onTap: () {
@@ -79,21 +74,41 @@ class _HomemanagerState extends State<Homemanager> {
           _currentIndex = index;
         });
       },
-      child: Container(
-        padding: EdgeInsets.all(10.w),
-        decoration: BoxDecoration(
-          color: isSelected
-              ? Theme.of(context).colorScheme.primary.withOpacity(0.1)
-              : Colors.transparent,
-          borderRadius: BorderRadius.circular(15.r),
-        ),
-        child: Image.asset(
-          iconPath,
-          width: 28.w,
-          height: 28.h,
-          color:
-              isSelected ? Theme.of(context).colorScheme.primary : Colors.grey,
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            iconPath,
+            width: 28.w,
+            height: 28.h,
+            color: isSelected
+                ? Theme.of(context).colorScheme.primary
+                : Colors.white,
+          ),
+          SizedBox(height: 5.h),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+              color: isSelected
+                  ? Theme.of(context).colorScheme.primary
+                  : Colors.white,
+            ),
+          ),
+          SizedBox(height: 5.h),
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+            height: 3.h,
+            width: isSelected ? 40.w : 0,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: BorderRadius.circular(2.r),
+            ),
+          ),
+        ],
       ),
     );
   }

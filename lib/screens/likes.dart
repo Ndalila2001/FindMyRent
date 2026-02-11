@@ -10,7 +10,8 @@ class Likes extends StatefulWidget {
 class _LikesState extends State<Likes> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.onSurface,
       body: Center(
         child: Text(
           'Likes Screen',

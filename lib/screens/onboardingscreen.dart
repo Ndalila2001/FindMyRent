@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
 import 'package:find_my_rent/conts/buttons.dart';
+import 'package:find_my_rent/screens/homemanager.dart';
 import 'package:find_my_rent/screens/login_page.dart';
 import 'package:find_my_rent/screens/typeofsignup.dart';
 import 'package:flutter/material.dart';
@@ -252,6 +253,16 @@ class Onboardingscreen extends StatelessWidget {
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           const Typeofsignup()));
+                            }),
+                        const SizedBox(height: 15),
+                        MainButton1(
+                            text: "TEMP BUTTON",
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const Homemanager()));
                             }),
                         const SizedBox(height: 15),
 
