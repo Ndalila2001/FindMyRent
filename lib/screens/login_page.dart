@@ -1,17 +1,133 @@
 // ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
 import 'package:find_my_rent/conts/buttons.dart';
+import 'package:find_my_rent/conts/errormessage.dart';
 import 'package:find_my_rent/conts/textfields.dart';
+import 'package:find_my_rent/screens/landlord/landlordemailconfirm.dart';
+import 'package:find_my_rent/screens/landlord/landlordkyc.dart';
 import 'package:find_my_rent/screens/tenant_user/signup_tenant.dart';
+import 'package:find_my_rent/services/api_service.dart';
+import 'package:find_my_rent/services/auth_storage.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginPage extends StatelessWidget {
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  bool isLoading = false;
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => CustomDialog(
+        title: 'Error',
+        message: message,
+      ),
+    );
+  }
+
+  void _showLoadingDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(
+          color: Theme.of(context).colorScheme.primary,
+        ),
+      ),
+    );
+  }
+
+  Future<void> _handleLogin() async {
+    if (usernameController.text.isEmpty || passwordController.text.isEmpty) {
+      _showErrorDialog('Please enter your email and password');
+      return;
+    }
+
+    setState(() {
+      isLoading = true;
+    });
+
+    _showLoadingDialog();
+
+    try {
+      final loginResponse = await ApiService.login(
+        username: usernameController.text,
+        password: passwordController.text,
+      );
+
+      final accessToken = loginResponse['access_token'];
+      final refreshToken = loginResponse['refresh_token'];
+
+      // Store tokens
+      await AuthStorage.saveTokens(
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+      );
+
+      // Get user profile to check verification status
+      final userProfile = await ApiService.getUserProfile(accessToken);
+
+      if (mounted) {
+        Navigator.pop(context); // Close loading dialog
+
+        final isEmailVerified = userProfile['verified'] ?? false;
+        final isKycVerified = userProfile['kyc_verified'] ?? false;
+
+        if (!isEmailVerified) {
+          // Email not verified
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LandlordEmailConfirm(
+                email: userProfile['email'],
+                password: passwordController.text,
+              ),
+            ),
+          );
+        } else if (!isKycVerified) {
+          // Email verified but KYC not done
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Landlordkyc(accessToken: accessToken),
+            ),
+          );
+        } else {
+          // Both verified, go to main app
+          // TODO: Navigate to main app home page
+          _showErrorDialog('Login successful! Welcome back.');
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        Navigator.pop(context); // Close loading dialog
+        _showErrorDialog(e.toString().replaceFirst('Exception: ', ''));
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,14 +183,16 @@ class LoginPage extends StatelessWidget {
                         ),
                         SizedBox(height: 40.h),
                         EmailTextField(
-                            controller: TextEditingController(),
+                            controller: usernameController,
                             hintText: "Email Address or Phone Number"),
                         SizedBox(height: 10.h),
                         PasswordTextField(
-                            controller: TextEditingController(),
+                            controller: passwordController,
                             hintText: "Password"),
                         SizedBox(height: 40.h),
-                        MainButton1(text: "Login", onTap: () {}),
+                        MainButton1(
+                            text: "Login",
+                            onTap: isLoading ? () {} : _handleLogin),
                         SizedBox(height: 20.h),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,

@@ -2,7 +2,6 @@
 
 import 'package:find_my_rent/conts/buttons.dart';
 import 'package:find_my_rent/screens/login_page.dart';
-import 'package:find_my_rent/screens/tenant_user/signup_tenant.dart';
 import 'package:find_my_rent/screens/typeofsignup.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';

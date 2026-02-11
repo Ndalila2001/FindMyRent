@@ -424,7 +424,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
                 value: selectedOption,
-                dropdownColor: Theme.of(context).colorScheme.surface,
+                dropdownColor: Theme.of(context).colorScheme.onSurface,
                 hint: Center(
                   child: Text(
                     widget.hintText,
