@@ -28,13 +28,13 @@ class _HomemanagerState extends State<Homemanager> {
       backgroundColor: Theme.of(context).colorScheme.onSurface,
       body: SafeArea(child: _pages[_currentIndex]),
       bottomNavigationBar: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+        margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(40.r),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 30.w),
+          padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 30.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -85,7 +85,7 @@ class _HomemanagerState extends State<Homemanager> {
                 ? Theme.of(context).colorScheme.primary
                 : Colors.white,
           ),
-          SizedBox(height: 5.h),
+          SizedBox(height: 2.h),
           Text(
             title,
             style: TextStyle(
@@ -97,7 +97,7 @@ class _HomemanagerState extends State<Homemanager> {
                   : Colors.white,
             ),
           ),
-          SizedBox(height: 5.h),
+          SizedBox(height: 2.h),
           AnimatedContainer(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
